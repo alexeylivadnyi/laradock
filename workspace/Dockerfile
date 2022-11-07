@@ -1538,7 +1538,9 @@ RUN if [ ${INSTALL_PROTOC} = true ]; then \
   unzip -q -o /tmp/protoc.zip -d /usr/local 'include/*' && \
   rm -f /tmp/protoc.zip && \
   chmod +x /usr/local/bin/protoc && \
-  chmod -R +r /usr/local/include/google \
+  chmod -R +r /usr/local/include/google && \
+  pecl install protobuf && \
+  echo "extension=protobuf.so" >> /etc/php/${LARADOCK_PHP_VERSION}/cli/php.ini \
 ;fi
 
 ###########################################################################
@@ -1782,6 +1784,20 @@ RUN if [ ${INSTALL_DNSUTILS} = true ]; then \
     apt-get update && apt-get install -y dnsutils \
 ;fi
 
+###########################################################################
+# PHP GRPC EXTENSION
+###########################################################################
+
+ARG INSTALL_PHPGRPC=false
+
+RUN if [ ${INSTALL_PHPGRPC} = true ]; then \
+    apt-get install zlib1g-dev && \
+    pecl install grpc && \
+    echo "extension=grpc.so" >> /etc/php/${LARADOCK_PHP_VERSION}/mods-available/grpc.ini && \
+    ln -s /etc/php/${LARADOCK_PHP_VERSION}/mods-available/grpc.ini /etc/php/${LARADOCK_PHP_VERSION}/cli/conf.d/20-grpc.ini \
+    && php -m | grep -q 'grpc' \
+;fi
+
 #
 #--------------------------------------------------------------------------
 # Final Touch
@@ -1794,6 +1810,13 @@ USER root
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     rm /var/log/lastlog /var/log/faillog
+
+# Для возможности добавить какие-то кастомные конфиги, в частности - репозитории артифактори
+COPY config.json /home/laradock/.composer/config.json
+COPY auth.json /home/laradock/.composer/auth.json
+
+RUN composer clear-cache
+# RUN composer global update mirrors
 
 # Set default work directory
 WORKDIR /var/www

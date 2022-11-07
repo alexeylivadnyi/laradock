@@ -1284,6 +1284,18 @@ RUN if [ ${INSTALL_DNSUTILS} = true ]; then \
 
 RUN set -xe; php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
 
+###########################################################################
+# PHP GRPC EXTENSION
+###########################################################################
+
+ARG INSTALL_PHPGRPC=false
+
+RUN if [ ${INSTALL_PHPGRPC} = true ]; then \
+    printf "\n" | pecl install -o -f grpc \
+    && rm -rf /tmp/pear \
+    && docker-php-ext-enable grpc \
+;fi
+
 #
 #--------------------------------------------------------------------------
 # Final Touch
