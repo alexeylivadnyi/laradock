@@ -2133,8 +2133,10 @@ services:
 ### datastore-emulator ###################################
     datastore-emulator:
       container_name: datastore-emulator
-        #      image: singularities/datastore-emulator
-      image: groovex/datastore-emulator:latest
+      build:
+       context: ./datastore
+       dockerfile: Dockerfile
+         # image: groovex/datastore-emulator:latest
       command: ["--consistency=1.0", "--no-store-on-disk"]
       ports:
         - 8081:8081
