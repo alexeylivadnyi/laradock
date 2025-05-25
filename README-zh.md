@@ -179,7 +179,7 @@ Homestead 是一个工具,为你控制虚拟机(使用 Homestead 特殊命令)�
 ## 依赖
 
 - [Git](https://git-scm.com/downloads)       
-- [Docker](https://www.docker.com/products/docker-desktop/)
+- [Docker](https://www.docker.com/products/docker/)
 
 <a name="Installation"></a>
 ## 安装
@@ -205,9 +205,9 @@ git clone https://github.com/laradock/laradock.git
 
 **请在开始之前阅读:**
 如果你正在使用 **Docker Toolbox** (VM)，选择以下任何一个方法：
-- 更新到 [Docker Desktop](https://www.docker.com/products/docker-desktop/) Mac/Windows 版本 (建议). 查看 [Upgrading Laradock](#upgrading-laradock)
+- 更新到 Docker [Native](https://www.docker.com/products/docker) Mac/Windows 版本 (建议). 查看 [Upgrading Laradock](#upgrading-laradock)
 - 使用 Laradock v3.* (访问 `Laradock-ToolBox` [分支](https://github.com/laradock/laradock/tree/Laradock-ToolBox)).
-如果您使用的是 **Docker Desktop**(Mac / Windows 版本)甚至是 Linux 版本,通常可以继续阅读这个文档，Laradock v4 以上版本将仅支持 **Docker Desktop**。
+如果您使用的是 **Docker Native**(Mac / Windows 版本)甚至是 Linux 版本,通常可以继续阅读这个文档，Laradock v4 以上版本将仅支持 **Docker Native**。
 
 1 - 运行容器: *(在运行 `docker-compose` 命令之前，确认你在 `laradock` 目录中*
 

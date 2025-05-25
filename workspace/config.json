@@ -1,0 +1,15 @@
+{
+    "repositories": [
+        {
+                "type": "composer",
+                "url": "https://artifactory.routesinc.com/artifactory/api/composer/php-local",
+                "only": ["route4me/*"]
+        },
+        {
+                "type": "composer",
+                "url": "https://artifactory.routesinc.com/artifactory/api/composer/php-remote",
+                "only": ["route4me/*"]
+        }
+    ]
+}
+
